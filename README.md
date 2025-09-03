@@ -22,11 +22,11 @@
 
 #### Tecnologias:
 - [] Framework: Spring Boot (versão 3.0 ou superior);
+- [] Linguagem: Java (zulu-21.42.19)
 - [] Segurança: Spring Security;
 - [] Autenticação: JWT (JSON Web Token);
-- [] Banco de Dados: MySQL ou PostgreSQL;
+- [] Banco de Dados: PostgreSQL;
 - [] ORM: Spring Data JPA;
-- [] Controle de Versão: Git (repositório público no GitHub, GitLab ou Bitbucket).
 
 #### Funcionalidades:
 
