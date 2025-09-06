@@ -18,6 +18,19 @@ public class TokenService {
   @Value("${api.security.token.secret}")
   private String secret;
 
+  public String generateTokenForTest(String email) {
+    try {
+      Algorithm algorithm = Algorithm.HMAC256(secret);
+      return JWT.create()
+          .withIssuer("argonock")
+          .withSubject(email)
+          .withExpiresAt(this.generateExpirationDate())
+          .sign(algorithm);
+    } catch (JWTCreationException exception) {
+      throw new RuntimeException("Error while generating token for test", exception);
+    }
+  }
+
   public String generateToken(User user) {
     try {
       Algorithm algorithm = Algorithm.HMAC256(secret);
