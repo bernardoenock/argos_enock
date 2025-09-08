@@ -1,6 +1,7 @@
 package com.api.argonock.service;
 
 import com.api.argonock.dto.PostRequestDTO;
+import com.api.argonock.dto.PostResponseDTO;
 import com.api.argonock.model.Post;
 import com.api.argonock.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -41,8 +43,14 @@ public class PostService {
     postRepository.deleteById(id);
   }
 
-  public List<Post> findPostsByUserId(String userId) {
-    return postRepository.findByUserId(userId);
+  public List<PostResponseDTO> findPostsByUserId(String userId) {
+    return postRepository.findByUserId(userId).stream()
+        .map(post -> new PostResponseDTO(
+            post.getId(),
+            post.getUser().getId(),
+            post.getTitle(),
+            post.getBody()))
+        .collect(Collectors.toList());
   }
 
   public boolean isPostOwner(Long postId, String userId) {
