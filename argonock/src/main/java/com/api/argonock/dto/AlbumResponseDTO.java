@@ -15,4 +15,10 @@ public class AlbumResponseDTO {
     this.userId = album.getUser().getId();
     this.title = album.getTitle();
   }
+
+  public AlbumResponseDTO(Long id, String userId, String title) {
+    this.id = id;
+    this.userId = userId;
+    this.title = title;
+  }
 }
