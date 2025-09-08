@@ -1,0 +1,4 @@
+<section class="albums-grid" aria-label="Albums List">
+  <app-album-card *ngFor="let album of albums; trackBy: trackByAlbumId" [album]="album"
+    [attr.aria-label]="'Album: ' + album.title"></app-album-card>
+</section>
