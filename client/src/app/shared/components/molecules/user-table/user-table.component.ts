@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../atoms/button/button.component';
 import { LoadingSpinnerComponent } from '../../atoms/loading-spinner/loading-spinner.component';
 import { User } from '../../../../core/models/api.models';
+import { UserFormComponent } from '../user-form/user-form.component';
 
 @Component({
   selector: 'app-user-table',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, LoadingSpinnerComponent],
+  imports: [CommonModule, ButtonComponent, LoadingSpinnerComponent, UserFormComponent],
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
@@ -17,11 +18,23 @@ export class UserTableComponent {
 
   userToDelete: User | null = null;
 
+  showUserForm: boolean = false;
+  editingUser: User | null = null;
+
   createNewUser() {
-    alert('Create user feature - to be implemented');
+    this.editingUser = null;
+    this.showUserForm = true;
   }
 
-  editUser(user: User) { alert(`Edit user ${user.name}`); }
+  editUser(user: User) {
+    this.editingUser = user;
+    this.showUserForm = true;
+  }
+  closeUserForm() {
+    this.showUserForm = false;
+    this.editingUser = null;
+  }
+
   viewUser(user: User) { alert(`View user ${user.name}`); }
   confirmDeleteUser(user: User) { this.userToDelete = user; }
   cancelDelete() { this.userToDelete = null; }
