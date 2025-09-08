@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label *ngIf="label" [for]="id" class="form-label">
+    {{ label }}
+    <span *ngIf="required" class="text-red-500 ml-1">*</span>
+  </label>
+
+  <input [id]="id" [type]="type" [value]="value" [placeholder]="placeholder" [disabled]="disabled" [readonly]="readonly"
+    [class]="getInputClasses()" (input)="onInput($event)" (blur)="onBlur()" (focus)="onFocus()" />
+
+  <div *ngIf="error && touched" class="form-error">
+    {{ error }}
+  </div>
+</div>
