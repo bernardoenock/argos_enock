@@ -1,0 +1,62 @@
+/* Full height background */
+.min-h-screen {
+  min-height: 100vh;
+  background-color: #f9fafb; /* Tailwind gray-50 fallback */
+}
+
+/* Center the form */
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form container spacing */
+.max-w-md {
+  max-width: 28rem; /* 448px */
+}
+
+/* Error box styling */
+.bg-red-50 {
+  background-color: #fef2f2;
+}
+.border-red-200 {
+  border-color: #fecaca;
+}
+.text-red-800 {
+  color: #991b1b;
+}
+.rounded-md {
+  border-radius: 0.375rem; /* 6px */
+}
+.p-4 {
+  padding: 1rem;
+}
+
+/* Heading and text */
+.text-3xl {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.text-gray-900 {
+  color: #111827;
+}
+.text-gray-600 {
+  color: #4b5563;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
