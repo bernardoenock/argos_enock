@@ -1,0 +1,19 @@
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nav-link:hover,
+.nav-link:focus {
+  color: #2563eb;
+  border-color: #2563eb;
+  outline: none;
+}
+.active {
+  color: #2563eb;
+  border-color: #2563eb;
+}
