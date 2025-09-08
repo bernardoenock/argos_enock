@@ -1,0 +1,17 @@
+.hamburger-btn {
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  color: #374151;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.hamburger-btn:hover,
+.hamburger-btn:focus {
+  background-color: #f3f4f6;
+  outline: none;
+}
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
