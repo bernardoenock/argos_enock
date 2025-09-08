@@ -1,0 +1,33 @@
+<div class="user-detail-container" *ngIf="selectedUser$ | async as user; else loadingOrError">
+
+  <header class="user-detail-header">
+    <h1 id="user-detail-title">User Detail: {{ user.name }}</h1>
+    <app-button variant="outline" size="sm" (clicked)="clearError()">Clear Error</app-button>
+  </header>
+
+  <section class="user-detail-main" aria-labelledby="user-detail-title">
+    <app-user-info [user]="user"></app-user-info>
+    <app-user-address [address]="user.address"></app-user-address>
+
+    <div class="user-detail-extra">
+      <p><strong>Phone:</strong> {{ user.phone || 'N/A' }}</p>
+      <p><strong>Website:</strong>
+        <a [href]="'https://' + user.website" target="_blank" rel="noopener noreferrer">
+          {{ user.website || 'N/A' }}
+        </a>
+      </p>
+      <p><strong>Company:</strong> {{ user.company.name || 'N/A' }}</p>
+    </div>
+  </section>
+
+</div>
+
+<ng-template #loadingOrError>
+  <div class="loading-container">
+    <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
+    <div class="error-message" *ngIf="error$ | async as error">
+      <p>{{ error }}</p>
+      <app-button variant="outline" size="sm" (clicked)="clearError()">Retry</app-button>
+    </div>
+  </div>
+</ng-template>
