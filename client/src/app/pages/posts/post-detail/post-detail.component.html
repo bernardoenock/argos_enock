@@ -1,0 +1,97 @@
+<div class="container mx-auto py-8">
+  <!-- Loading State -->
+  <div *ngIf="postsLoading$ | async" class="text-center py-12">
+    <app-loading-spinner size="lg" text="Loading post..." [centered]="true"></app-loading-spinner>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="postsError$ | async" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+    <div class="flex justify-between items-center">
+      <h3 class="text-sm font-medium text-red-800">{{ postsError$ | async }}</h3>
+      <app-button variant="outline" size="sm" (clicked)="clearError()">Dismiss</app-button>
+    </div>
+  </div>
+
+  <!-- Post Content -->
+  <div *ngIf="selectedPost$ | async as post" class="max-w-4xl mx-auto">
+    <!-- Back Navigation -->
+    <div class="mb-6">
+      <app-button variant="outline" size="sm" routerLink="/posts">← Back to Posts</app-button>
+    </div>
+
+    <!-- Post Header -->
+    <article class="card mb-8">
+      <div class="card-header">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ post.title }}</h1>
+        <p class="text-gray-600">By User {{ post.userId }} • Post ID: {{ post.id }}</p>
+      </div>
+      <div class="card-content">
+        <p class="text-gray-800 leading-relaxed text-lg">{{ post.body }}</p>
+      </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-gray-900">Comments ({{ (comments$ | async)?.length || 0 }})</h2>
+      </div>
+
+      <!-- Add Comment Form -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-lg font-semibold text-gray-900">Add a Comment</h3>
+        </div>
+        <div class="card-content">
+          <form [formGroup]="commentForm" (ngSubmit)="onSubmitComment()">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <app-input id="name" type="text" label="Your Name" placeholder="Enter your name" [required]="true"
+                formControlName="name" [error]="getFieldError('name')"></app-input>
+
+              <app-input id="email" type="email" label="Your Email" placeholder="Enter your email" [required]="true"
+                formControlName="email" [error]="getFieldError('email')"></app-input>
+            </div>
+
+            <div class="mb-4">
+              <label for="comment-body" class="form-label">Comment</label>
+              <textarea id="comment-body" formControlName="body" rows="4" class="form-input"
+                placeholder="Share your thoughts..."></textarea>
+              <div *ngIf="getFieldError('body')" class="form-error">{{ getFieldError('body') }}</div>
+            </div>
+
+            <app-button type="submit" variant="primary" [disabled]="commentForm.invalid"
+              [loading]="postsLoading$ | async">Post Comment</app-button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Comments List -->
+      <div class="space-y-4">
+        <div *ngFor="let comment of comments$ | async; trackBy: trackByCommentId" class="card">
+          <div class="card-content">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h4 class="font-semibold text-gray-900">{{ comment.name }}</h4>
+                <p class="text-sm text-gray-600">{{ comment.email }}</p>
+              </div>
+              <span class="text-xs text-gray-500">#{{ comment.id }}</span>
+            </div>
+            <p class="text-gray-800 leading-relaxed">{{ comment.body }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty Comments State -->
+      <div *ngIf="!(postsLoading$ | async) && (comments$ | async)?.length === 0" class="text-center py-8">
+        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No comments yet</h3>
+        <p class="text-gray-600">Be the first to share your thoughts!</p>
+      </div>
+    </section>
+  </div>
+</div>
