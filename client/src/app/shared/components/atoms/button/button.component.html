@@ -1,0 +1,4 @@
+<button [class]="getButtonClasses()" [disabled]="disabled || loading" [type]="type" (click)="onClick($event)">
+  <span *ngIf="loading" class="loading mr-2"></span>
+  <ng-content></ng-content>
+</button>
