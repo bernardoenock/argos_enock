@@ -4,6 +4,7 @@ import { ButtonComponent } from '../../atoms/button/button.component';
 import { LoadingSpinnerComponent } from '../../atoms/loading-spinner/loading-spinner.component';
 import { User } from '../../../../core/models/api.models';
 import { UserFormComponent } from '../user-form/user-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-table',
@@ -21,6 +22,8 @@ export class UserTableComponent {
   showUserForm: boolean = false;
   editingUser: User | null = null;
 
+  constructor(private router: Router) {}
+
   createNewUser() {
     this.editingUser = null;
     this.showUserForm = true;
@@ -30,12 +33,16 @@ export class UserTableComponent {
     this.editingUser = user;
     this.showUserForm = true;
   }
+
   closeUserForm() {
     this.showUserForm = false;
     this.editingUser = null;
   }
 
-  viewUser(user: User) { alert(`View user ${user.name}`); }
+  viewUser(user: User) {
+    this.router.navigate(['/users', user.id]);
+  }
+
   confirmDeleteUser(user: User) { this.userToDelete = user; }
   cancelDelete() { this.userToDelete = null; }
   performDelete() { alert(`Deleted user ${this.userToDelete?.name}`); this.userToDelete = null; }
