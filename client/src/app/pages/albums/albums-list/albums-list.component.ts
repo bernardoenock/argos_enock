@@ -9,6 +9,7 @@ import { AppState } from '../../../core/state/app.state';
 import { selectAllAlbums, selectAlbumsLoading, selectAlbumsError } from '../../../core/state/app.selectors';
 import { loadAlbums, clearAlbumsError } from '../../../core/state/albums/albums.actions';
 import { Album } from '../../../core/models/api.models';
+import { AlbumsGridComponent } from '../../../shared/components/organisms/albums-grid/albums-grid.component';
 
 @Component({
   selector: 'app-albums-list',
@@ -17,7 +18,8 @@ import { Album } from '../../../core/models/api.models';
     CommonModule,
     RouterModule,
     ButtonComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlbumsGridComponent
   ],
   templateUrl: './albums-list.component.html',
   styleUrls: ['./albums-list.component.css']
@@ -39,9 +41,5 @@ export class AlbumsListComponent implements OnInit {
 
   clearError(): void {
     this.store.dispatch(clearAlbumsError());
-  }
-
-  trackByAlbumId(index: number, album: Album): number {
-    return album.id;
   }
 }
