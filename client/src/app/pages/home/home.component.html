@@ -1,0 +1,133 @@
+<div class="container mx-auto py-12">
+  <!-- Hero Section -->
+  <div class="text-center mb-16">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      Angular Atomic Design Demo
+    </h1>
+    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+      A modern Angular application showcasing Atomic Design principles,
+      NgRx state management, and dynamic API switching capabilities.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <app-button variant="primary" size="lg" routerLink="/posts">
+        Explore Posts
+      </app-button>
+
+      <app-button variant="outline" size="lg" routerLink="/albums">
+        View Albums
+      </app-button>
+    </div>
+  </div>
+
+  <!-- Features Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="card">
+      <div class="card-content text-center">
+        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Atomic Design</h3>
+        <p class="text-gray-600">
+          Clean component architecture following atomic design principles with atoms, molecules, and organisms.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content text-center">
+        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">NgRx State Management</h3>
+        <p class="text-gray-600">
+          Powerful state management with effects, reducers, and selectors for predictable data flow.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content text-center">
+        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Dynamic API Switching</h3>
+        <p class="text-gray-600">
+          Switch between JSONPlaceholder and local APIs dynamically using Axios with interceptors.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content text-center">
+        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">User Management</h3>
+        <p class="text-gray-600">
+          Complete CRUD operations for users with admin panel and role-based access control.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content text-center">
+        <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Posts & Comments</h3>
+        <p class="text-gray-600">
+          Browse posts with pagination, view details, and add comments with real-time updates.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content text-center">
+        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Photo Albums</h3>
+        <p class="text-gray-600">
+          Responsive photo galleries with optimized loading and intuitive navigation.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="mt-16 text-center">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8">Built With Modern Technologies</h2>
+    <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600">
+      <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Angular 20</span>
+      <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">TypeScript</span>
+      <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">NgRx</span>
+      <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Axios</span>
+      <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Atomic Design</span>
+      <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Responsive CSS</span>
+    </div>
+  </div>
+</div>
