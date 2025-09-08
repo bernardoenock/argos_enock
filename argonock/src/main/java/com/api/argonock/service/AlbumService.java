@@ -1,6 +1,7 @@
 package com.api.argonock.service;
 
 import com.api.argonock.dto.AlbumRequestDTO;
+import com.api.argonock.dto.AlbumResponseDTO;
 import com.api.argonock.model.Album;
 import com.api.argonock.model.User;
 import com.api.argonock.repository.AlbumRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AlbumService {
@@ -27,6 +29,15 @@ public class AlbumService {
 
   public List<Album> findByUserId(String userId) {
     return albumRepository.findByUserId(userId);
+  }
+
+  public List<AlbumResponseDTO> findAlbumsByUserId(String userId) {
+    return albumRepository.findByUserId(userId).stream()
+        .map(album -> new AlbumResponseDTO(
+            album.getId(),
+            album.getUser().getId(),
+            album.getTitle()))
+        .collect(Collectors.toList());
   }
 
   public Optional<Album> findById(Long id) {
