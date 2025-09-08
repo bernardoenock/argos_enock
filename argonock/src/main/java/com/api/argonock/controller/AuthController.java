@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,12 +35,26 @@ public class AuthController {
   public record AuthenticationResponse(String token) {
   }
 
+  @GetMapping("/")
+  public String home() {
+    return "API is running! 🚀";
+  }
+
   @PostMapping("/login")
   public ResponseEntity<AuthenticationResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
-    var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password());
-    var authentication = this.authenticationManager.authenticate(usernamePassword);
-    var user = (User) authentication.getPrincipal();
-    var token = tokenService.generateToken(user);
+    Authentication authentication = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+
+    Object principal = authentication.getPrincipal();
+    User user;
+
+    if (principal instanceof AuthorizationService.CustomUserDetails customUser) {
+      user = customUser.getUser();
+    } else {
+      user = authorizationService.findByEmail(loginRequest.email());
+    }
+
+    String token = tokenService.generateToken(user);
     return ResponseEntity.ok(new AuthenticationResponse(token));
   }
 
