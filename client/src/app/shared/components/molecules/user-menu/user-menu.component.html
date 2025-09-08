@@ -1,0 +1,28 @@
+<div class="user-menu">
+  <div *ngIf="isAuthenticated$ | async" class="user-info">
+    <div class="user-details">
+      <div class="user-email">{{ (currentUser$ | async)?.email }}</div>
+      <div class="user-name">{{ (currentUser$ | async)?.name }}</div>
+    </div>
+
+    <div class="user-actions">
+      <app-button *ngIf="(currentUser$ | async)?.isAdmin" variant="outline" size="sm" (clicked)="navigateToAdmin()">
+        Admin
+      </app-button>
+
+      <app-button variant="secondary" size="sm" (clicked)="onLogout()">
+        Logout
+      </app-button>
+    </div>
+  </div>
+
+  <div *ngIf="!(isAuthenticated$ | async)" class="guest-actions">
+    <app-button variant="outline" size="sm" (clicked)="navigateToLogin()">
+      Login
+    </app-button>
+
+    <app-button variant="primary" size="sm" (clicked)="navigateToRegister()">
+      Register
+    </app-button>
+  </div>
+</div>
