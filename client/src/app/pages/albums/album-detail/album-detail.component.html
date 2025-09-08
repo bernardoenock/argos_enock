@@ -1,0 +1,95 @@
+<div class="container mx-auto py-8">
+  <!-- Loading State -->
+  <div *ngIf="albumsLoading$ | async" class="text-center py-12">
+    <app-loading-spinner size="lg" text="Loading album..." [centered]="true">
+    </app-loading-spinner>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="albumsError$ | async" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+    <div class="flex justify-between items-center">
+      <h3 class="text-sm font-medium text-red-800">
+        {{ albumsError$ | async }}
+      </h3>
+      <app-button variant="outline" size="sm" (clicked)="clearError()">
+        Dismiss
+      </app-button>
+    </div>
+  </div>
+
+  <!-- Album Content -->
+  <div *ngIf="selectedAlbum$ | async as album" class="max-w-7xl mx-auto">
+    <!-- Back Navigation -->
+    <div class="mb-6">
+      <app-button variant="outline" size="sm" routerLink="/albums">
+        ← Back to Albums
+      </app-button>
+    </div>
+
+    <!-- Album Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">
+        {{ album.title }}
+      </h1>
+      <p class="text-gray-600">
+        By User {{ album.userId }} • Album ID: {{ album.id }} •
+        {{ (photos$ | async)?.length || 0 }} photos
+      </p>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <div *ngFor="let photo of photos$ | async; trackBy: trackByPhotoId"
+        class="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="aspect-square relative overflow-hidden">
+          <img [src]="photo.thumbnailUrl" [alt]="photo.title"
+            class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+            (error)="onImageError($event)" loading="lazy" />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-200 flex items-center justify-center">
+            <button *ngIf="showOverlay" (click)="viewFullSize(photo)"
+              class="opacity-0 group-hover:opacity-100 bg-white text-gray-900 px-3 py-1 rounded text-sm font-medium transition-opacity duration-200 hover:bg-gray-100">
+              View Full Size
+            </button>
+          </div>
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-900 line-clamp-2" [title]="photo.title">
+            {{ photo.title }}
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!(albumsLoading$ | async) && (photos$ | async)?.length === 0" class="text-center py-12">
+      <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+          </path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">No photos found</h3>
+      <p class="text-gray-600">This album appears to be empty.</p>
+    </div>
+  </div>
+
+  <!-- Full Size Modal -->
+  <div *ngIf="selectedPhoto" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+    (click)="closeModal()">
+    <div class="max-w-4xl max-h-full relative">
+      <img [src]="selectedPhoto.url" [alt]="selectedPhoto.title" class="max-w-full max-h-full object-contain"
+        (click)="$event.stopPropagation()" />
+
+      <button (click)="closeModal()"
+        class="absolute top-4 right-4 bg-black bg-opacity-50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-75 transition-opacity">
+        ✕
+      </button>
+
+      <div class="absolute bottom-4 left-4 right-4 bg-black bg-opacity-50 text-white p-4 rounded">
+        <h3 class="font-medium">{{ selectedPhoto.title }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
