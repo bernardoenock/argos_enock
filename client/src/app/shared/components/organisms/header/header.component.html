@@ -1,0 +1,54 @@
+<header class="bg-white shadow-sm border-b border-gray-200">
+  <div class="container mx-auto">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo and Navigation -->
+      <div class="flex items-center space-x-8">
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold text-gray-900">
+            <a routerLink="/" class="hover:text-blue-600 transition-colors">
+              Enock JSONPlaceholder
+            </a>
+          </h1>
+        </div>
+
+        <nav class="hidden md:flex space-x-6">
+          <a routerLink="/posts" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+            class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent">
+            Posts
+          </a>
+          <a routerLink="/albums" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+            class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent">
+            Albums
+          </a>
+        </nav>
+      </div>
+
+      <!-- API Switcher and User Menu -->
+      <div class="flex items-center space-x-6">
+        <div class="hidden md:block">
+          <app-api-switcher></app-api-switcher>
+        </div>
+
+        <app-user-menu></app-user-menu>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden border-t border-gray-200 py-3">
+      <div class="flex flex-col space-y-2">
+        <a routerLink="/posts" routerLinkActive="text-blue-600 font-medium"
+          class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm transition-colors">
+          Posts
+        </a>
+        <a routerLink="/albums" routerLinkActive="text-blue-600 font-medium"
+          class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm transition-colors">
+          Albums
+        </a>
+
+        <div class="pt-2 border-t border-gray-200">
+          <app-api-switcher></app-api-switcher>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
