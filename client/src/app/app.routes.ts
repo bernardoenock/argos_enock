@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/albums/album-detail/album-detail.component').then(m => m.AlbumDetailComponent)
   },
   {
+    path: 'users/:id',
+    loadComponent: () => import('./pages/admin/user-detail/user-detail.component').then(m => m.UserDetailComponent)
+  },
+  {
     path: 'admin',
     loadComponent: () => import('./pages/admin/admin.component').then(m => m.AdminComponent)
   },
