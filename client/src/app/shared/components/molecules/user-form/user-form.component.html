@@ -1,0 +1,49 @@
+<div *ngIf="isVisible" class="user-form-backdrop" (click)="onBackdropClick($event)">
+  <div class="user-form-modal relative" (click)="$event.stopPropagation()">
+    <button type="button" class="user-form-close" (click)="cancel()">×</button>
+
+    <h2 class="text-xl font-semibold mb-4">{{ user ? 'Edit User' : 'Create New User' }}</h2>
+
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="name" />
+      </div>
+
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" formControlName="username" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="text" formControlName="phone" />
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input type="text" formControlName="website" />
+      </div>
+
+      <div class="form-group">
+        <label>Company Name</label>
+        <input type="text" formControlName="companyName" />
+      </div>
+
+      <div class="form-group">
+        <label>Company Catch Phrase</label>
+        <input type="text" formControlName="companyCatchPhrase" />
+      </div>
+
+      <div class="flex justify-end space-x-3 mt-4">
+        <app-button variant="outline" (clicked)="cancel()">Cancel</app-button>
+        <app-button variant="primary" type="submit">Save</app-button>
+      </div>
+    </form>
+  </div>
+</div>
