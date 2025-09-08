@@ -1,0 +1,12 @@
+.user-info-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  flex: 1;
+}
+
+.user-info-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
