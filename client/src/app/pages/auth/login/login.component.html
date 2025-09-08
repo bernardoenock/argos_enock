@@ -1,0 +1,48 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Sign in to your account
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        Use any JSONPlaceholder username (e.g., "Bret", "Antonette", "Samantha")
+      </p>
+    </div>
+
+    <form class="mt-8 space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="authError$ | async" class="bg-red-50 border border-red-200 rounded-md p-4">
+        <div class="flex">
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">
+              {{ authError$ | async }}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <app-input id="username" type="text" label="Username" placeholder="Enter your username" [required]="true"
+          formControlName="username" [error]="getFieldError('username')"></app-input>
+
+        <app-input id="password" type="password" label="Password" placeholder="Enter your password" [required]="true"
+          formControlName="password" [error]="getFieldError('password')"></app-input>
+      </div>
+
+      <div>
+        <app-button type="submit" variant="primary" size="md" [fullWidth]="true" [loading]="authLoading$ | async"
+          [disabled]="loginForm.invalid">
+          Sign in
+        </app-button>
+      </div>
+
+      <div class="text-center">
+        <span class="text-sm text-gray-600">
+          Don't have an account?
+          <a routerLink="/auth/register" class="font-medium text-blue-600 hover:text-blue-500 ml-1">
+            Register here
+          </a>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

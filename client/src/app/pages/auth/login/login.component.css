@@ -1,0 +1,68 @@
+/* Center the login form vertically and horizontally */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Basic spacing and typography */
+.text-center {
+  text-align: center;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.text-gray-600 {
+  color: #4B5563;
+}
+
+.text-blue-600 {
+  color: #2563EB;
+}
+
+.text-blue-500:hover {
+  color: #3B82F6;
+}
+
+/* Error styling */
+.bg-red-50 {
+  background-color: #FEF2F2;
+}
+
+.border-red-200 {
+  border-color: #FECACA;
+}
+
+.text-red-800 {
+  color: #991B1B;
+}
+
+/* Spacing utilities */
+.mt-2 { margin-top: 0.5rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.ml-3 { margin-left: 0.75rem; }
+.ml-1 { margin-left: 0.25rem; }
+
+.max-w-md { max-width: 28rem; }
+.w-full { width: 100%; }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
+.space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
+.space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem; }
+
+.rounded-md { border-radius: 0.375rem; }
+.p-4 { padding: 1rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+
+.bg-gray-50 { background-color: #F9FAFB; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
