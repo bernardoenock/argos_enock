@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,31 +16,32 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
-  @Value("${api.security.token.secret}")
+  @Value("${api.security.token.secret:default-test-secret}")
   private String secret;
 
+  @PostConstruct
+  void validateSecret() {
+    if (secret == null || secret.isBlank()) {
+      throw new IllegalStateException("Token secret must not be null or blank!");
+    }
+  }
+
   public String generateTokenForTest(String email) {
+    return generateTokenInternal(email);
+  }
+
+  public String generateToken(User user) {
+    return generateTokenInternal(user.getEmail());
+  }
+
+  private String generateTokenInternal(String subject) {
     try {
       Algorithm algorithm = Algorithm.HMAC256(secret);
       return JWT.create()
           .withIssuer("argonock")
-          .withSubject(email)
+          .withSubject(subject)
           .withExpiresAt(this.generateExpirationDate())
           .sign(algorithm);
-    } catch (JWTCreationException exception) {
-      throw new RuntimeException("Error while generating token for test", exception);
-    }
-  }
-
-  public String generateToken(User user) {
-    try {
-      Algorithm algorithm = Algorithm.HMAC256(secret);
-      String token = JWT.create()
-          .withIssuer("argonock")
-          .withSubject(user.getEmail())
-          .withExpiresAt(this.generateExpirationDate())
-          .sign(algorithm);
-      return token;
     } catch (JWTCreationException exception) {
       throw new RuntimeException("Error while generating token", exception);
     }
@@ -54,7 +56,7 @@ public class TokenService {
           .verify(token)
           .getSubject();
     } catch (JWTVerificationException exception) {
-      return "";
+      return null;
     }
   }
 
