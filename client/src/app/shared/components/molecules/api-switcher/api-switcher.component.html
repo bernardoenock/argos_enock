@@ -1,0 +1,6 @@
+<div class="flex space-x-2">
+  <app-button *ngFor="let env of availableEnvironments" [class]="getButtonClasses(env)"
+    (clicked)="switchEnvironment(env)">
+    {{ env.displayName }}
+  </app-button>
+</div>
