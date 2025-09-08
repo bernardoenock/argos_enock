@@ -87,9 +87,8 @@ public class PostController {
   }
 
   @GetMapping(params = "userId")
-  public List<PostResponseDTO> getPostsByUserId(@RequestParam String userId) {
-    return postService.findPostsByUserId(userId).stream()
-        .map(PostResponseDTO::new)
-        .collect(Collectors.toList());
+  public ResponseEntity<List<PostResponseDTO>> getPostsByUserId(@RequestParam String userId) {
+    List<PostResponseDTO> posts = postService.findPostsByUserId(userId);
+    return ResponseEntity.ok(posts);
   }
 }
