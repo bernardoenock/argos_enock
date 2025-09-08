@@ -1,112 +1,88 @@
-# Replicate {JSON} Placeholder 
+# 📌 Projeto Full Stack – Spring Boot + Angular
 
-## Backend
+Este repositório contém um projeto **full stack** que combina:
 
-### Habilidades provadas
+* **Front End (`/client`)** → Aplicação Angular 20 que consome APIs.
+* **Back End (`/argonock`)** → Réplica da API [JSONPlaceholder](https://jsonplaceholder.typicode.com/) construída com Spring Boot + PostgreSQL.
 
-- [] Desenvolvimento de APIs RESTful seguras com Spring Boot, 
-- [] Implementação de autenticação baseada em token JWT (JSON Web Token).
-  
-### Sobre
+---
 
-#### Core:
-- [] API RESTful que replica funcionalidades semelhantes às oferecidas pelo JSONPlaceholder, incluindo recursos como:
-  - [] postagens, 
-  - [] comentários, 
-  - [] álbuns, 
-  - [] fotos, 
-  - [] tarefas, 
-  - [] usuários. 
+## 🚀 Visão Geral
 
-- [] A API protegida por um sistema de autenticação JWT Bearer.
+O objetivo do projeto é fornecer um ambiente completo que permite:
 
-#### Tecnologias:
-- [] Framework: Spring Boot (versão 3.0 ou superior);
-- [] Linguagem: Java (zulu-21.42.19)
-- [] Segurança: Spring Security;
-- [] Autenticação: JWT (JSON Web Token);
-- [] Banco de Dados: PostgreSQL;
-- [] ORM: Spring Data JPA;
+* Alternar entre **API local (argonock)** e **API pública JSONPlaceholder** via Switcher no front end.
+* Realizar **login simulado** quando conectado à API JSONPlaceholder.
+* Utilizar **login real com JWT** quando conectado à API local (`argonock`).
 
-#### Funcionalidades:
+---
 
-- [] Autenticação e Autorização:
-  - [] Implementar registro de usuários (signup) e login;
-  - [] Gerar tokens JWT para usuários autenticados;
-  - [] Proteger endpoints sensíveis, permitindo acesso apenas a usuários autenticados.
+## 📂 Estrutura do Repositório
 
-- [] Recursos da API:
-  - [] Postagens (/posts):
-    - [] CRUD completo (Create, Read, Update, Delete);
-    - [] Relacionamento com comentários.
-  - [] Comentários (/comments):
-    - [] CRUD completo;
-    - [] Relacionamento com postagens.
-  - [] Álbuns (/albums):
-    - [] CRUD completo;
-    - [] Relacionamento com fotos.
-  - [] Fotos (/photos):
-    - [] CRUD completo;
-    - [] Relacionamento com álbuns.
-  - [] Tarefas (/todos):
-    - [] CRUD completo;
-    - [] Atribuição a usuários.
-  - Usuários (/users):
-    - [] CRUD completo;
-    - [] Campos como nome, email, etc.
-  
-- [] Documentação: Utilizar Swagger/OpenAPI para documentar os endpoints da API;
-- [] Testes: Implementar testes unitários e de integração;
-- [] Boas Práticas: Seguir princípios de Clean Code e SOLID;
+```
+/argonock   → Back End (Spring Boot + PostgreSQL)
+/client     → Front End (Angular 20 + NgRx + Axios)
+```
 
+Cada módulo possui seu próprio **README detalhado** com instruções específicas de instalação e execução.
 
-## Frontend
+* 👉 [📘 Instruções do Back End (/argonock)](./argonock/README.md)
+* 👉 [📗 Instruções do Front End (/client)](./client/README.md)
 
-### Habilidades provadas
-- [] Interfaces web modernas
-- [] Consumo de APIs REST
-- [] Gestão de estado e boas práticas de desenvolvimento utilizando Angular.
-  
-### Sobre
+---
 
-#### Core:
-- [] Desenvolver o frontend de um blog consumindo a API pública JSONPlaceholder, garantindo uma experiência de usuário fluida e responsiva.
+## ⚙️ Tecnologias Utilizadas
 
+### Front End
 
-#### Tecnologias:
-- [] Framework: Angular (versão 14+);
-- [] Gerenciador de pacotes: npm;
-- [] Estilização: CSS puro;
-- [] Consumo de API: Axios;
-- [] Gerenciamento de estado: Services, NgRx;
-- [] Controle de versão: Git (repositório público no GitHub).
-  
-#### Funcionalidades:
-- [] Painel Administrativo:
-  - [] Tela de autenticação simples para acesso ao painel de administração;
-  - [] CRUD de usuários (criação, edição, listagem e remoção);
-  - [] Validações nos formulários (e.g., campos obrigatórios, formatos de email, etc.).
-- [] Listagem de Postagens:
-  - [] Página com a listagem de postagens;
-  - [] Exibição dos detalhes de uma postagem com seus respectivos comentários;
-  - [] Funcionalidade para adicionar um novo comentário em um post;
-  - [] Paginação para melhorar a navegação caso haja grande volume de dados.
-- [] Galeria de Álbuns:
-  - [] Tela para exibição dos álbuns disponíveis;
-  - [] Exibição das fotos dentro de cada álbum;
-  - [] Layout responsivo e intuitivo.
-- [] Diferenciais:
-  - [] Implementação de testes unitários e/ou testes e2e;
-  - [] Uso de TypeScript;
-  - [] Adoção de boas práticas de acessibilidade (A11Y);
-  - [] Design otimizado para dispositivos móveis (Mobile First);
-  - [] Deploy em um ambiente acessível (Vercel, Netlify, Firebase Hosting, AWS, etc.).
+* Angular 20
+* NgRx (gerenciamento de estado)
+* Axios (requisições HTTP)
+* CSS puro
 
-## Full Stack
+### Back End
 
-- [] Controle de Versão: Commits frequentes e mensagens claras no Git.
-- [] Um README detalhado contendo:
-  - [] Instruções para configurar e executar o projeto;
-  - [] Descrição dos endpoints disponíveis;
-  - [] Detalhes sobre a implementação da autenticação JWT;
-  - [] Possíveis melhorias futuras.
+* Java 21 + Spring Boot 3.5.5
+* Spring Security + JWT
+* PostgreSQL + Spring Data JPA
+* Lombok, Validation, DevTools
+* OpenAPI (Swagger UI)
+
+---
+
+## ▶️ Execução Rápida
+
+### 1. Clone o repositório
+
+```bash
+git clone git@github.com:bernardoenock/argos_enock.git
+cd argos_enock
+```
+
+### 2. Configure o Back End
+
+Siga as instruções do [README do Argonock](./argonock/README.md) para rodar a API local com PostgreSQL.
+
+### 3. Configure o Front End
+
+Siga as instruções do [README do Client](./client/README.md) para rodar o Angular.
+
+---
+
+## 📌 Notas Importantes
+
+* Se utilizar a **API JSONPlaceholder**, o login será apenas **simulado**.
+* Se utilizar a **API local (`argonock`)**, o login será feito via **JWT** com autenticação real.
+* O **Switcher** no front end permite trocar facilmente entre as duas opções.
+
+---
+
+📚 **Referências Úteis:**
+
+* [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+* [Angular Docs](https://angular.io/docs)
+* [Spring Boot Docs](https://spring.io/projects/spring-boot)
+* [NgRx Docs](https://ngrx.io/docs)
+* [Axios Docs](https://axios-http.com/)
+
+---
