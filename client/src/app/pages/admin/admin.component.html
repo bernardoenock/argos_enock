@@ -1,111 +1,25 @@
-<div class="container mx-auto py-8">
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-2">Admin Panel</h1>
+<div class="container mx-auto py-6 px-4">
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-1">Admin Panel</h1>
     <p class="text-gray-600">Manage users and application settings.</p>
-  </div>
+  </header>
 
   <!-- Error Message -->
-  <div *ngIf="usersError$ | async" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+  <div *ngIf="usersError$ | async" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6" role="alert">
     <div class="flex justify-between items-center">
-      <h3 class="text-sm font-medium text-red-800">
-        {{ usersError$ | async }}
-      </h3>
-      <app-button variant="outline" size="sm" (clicked)="clearError()">
-        Dismiss
-      </app-button>
+      <p class="text-sm font-medium text-red-800">{{ usersError$ | async }}</p>
+      <button class="text-sm underline" (click)="clearError()">Dismiss</button>
     </div>
   </div>
 
-  <!-- Users Management Section -->
-  <section class="card mb-8">
-    <div class="card-header">
-      <div class="flex justify-between items-center">
-        <h2 class="text-xl font-semibold text-gray-900">User Management</h2>
-        <app-button variant="primary" (clicked)="createNewUser()">
-          Add New User
-        </app-button>
-      </div>
-    </div>
+  <!-- Users Table -->
+  <app-user-table [users]="usersList" [loading]="usersLoading$ | async">
+  </app-user-table>
 
-    <div class="card-content">
-      <div *ngIf="usersLoading$ | async" class="text-center py-8">
-        <app-loading-spinner size="md" text="Loading users..." [centered]="true">
-        </app-loading-spinner>
-      </div>
-
-      <div *ngIf="!(usersLoading$ | async)" class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th>User</th>
-              <th>Contact</th>
-              <th>Company</th>
-              <th class="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users$ | async; trackBy: trackByUserId" class="hover:bg-gray-50">
-              <td>{{ user.name }} (@{{ user.username }})</td>
-              <td>{{ user.email }}<br>{{ user.phone }}</td>
-              <td>{{ user.company.name }}<br>{{ user.company.catchPhrase }}</td>
-              <td class="text-right space-x-2">
-                <app-button variant="outline" size="sm" (clicked)="editUser(user)">Edit</app-button>
-                <app-button variant="outline" size="sm" (clicked)="viewUser(user)">View</app-button>
-                <app-button variant="outline" size="sm" (clicked)="confirmDeleteUser(user)"
-                  class="text-red-600 hover:text-red-500">Delete</app-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div *ngIf="!(usersLoading$ | async) && (users$ | async)?.length === 0" class="text-center py-8">
-        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
-            </path>
-          </svg>
-        </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">No users found</h3>
-        <p class="text-gray-600">Try switching to a different API environment or create a new user.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Statistics Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="card">
-      <div class="card-content text-center">
-        <div class="text-2xl font-bold text-blue-600">{{ (users$ | async)?.length || 0 }}</div>
-        <div class="text-sm text-gray-600">Total Users</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-content text-center">
-        <div class="text-2xl font-bold text-green-600">{{ getActiveUsersCount() }}</div>
-        <div class="text-sm text-gray-600">Active Users</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-content text-center">
-        <div class="text-2xl font-bold text-purple-600">{{ getCompaniesCount() }}</div>
-        <div class="text-sm text-gray-600">Companies</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Delete Confirmation Modal -->
-<div *ngIf="userToDelete" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-  <div class="bg-white rounded-lg p-6 max-w-md w-full">
-    <h3 class="text-lg font-medium text-gray-900 mb-4">Confirm Delete</h3>
-    <p class="text-gray-600 mb-6">Are you sure you want to delete user "{{ userToDelete.name }}"? This action cannot be
-      undone.</p>
-    <div class="flex space-x-3 justify-end">
-      <app-button variant="outline" (clicked)="cancelDelete()">Cancel</app-button>
-      <app-button variant="primary" (clicked)="performDelete()" [loading]="usersLoading$ | async">Delete
-        User</app-button>
-    </div>
+  <!-- Statistics -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+    <app-statistics-card title="Total Users" [count]="usersList.length" color="blue"></app-statistics-card>
+    <app-statistics-card title="Active Users" [count]="getActiveUsersCount()" color="green"></app-statistics-card>
+    <app-statistics-card title="Companies" [count]="getCompaniesCount()" color="purple"></app-statistics-card>
   </div>
 </div>
