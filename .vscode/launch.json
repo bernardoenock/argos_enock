@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ArgonockApplication<argonock>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.api.argonock.ArgonockApplication",
+      "projectName": "argonock",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
