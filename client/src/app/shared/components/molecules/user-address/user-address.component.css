@@ -1,0 +1,12 @@
+.user-address-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #fafafa;
+  flex: 1;
+}
+
+.user-address-card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}

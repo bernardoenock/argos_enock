@@ -1,0 +1,6 @@
+<div class="user-address-card" aria-label="User address information">
+  <h3>Address</h3>
+  <p>{{ address.street || 'N/A' }}, {{ address.suite || '' }}</p>
+  <p>{{ address.city || 'N/A' }}, {{ address.zipcode || 'N/A' }}</p>
+  <p *ngIf="address.geo">Geo: ({{ address.geo.lat }}, {{ address.geo.lng }})</p>
+</div>
