@@ -1,0 +1,70 @@
+<div class="container mx-auto py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Posts</h1>
+    <p class="text-gray-600">Explore articles and discussions from our community.</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="postsError$ | async" class="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+    <div class="flex justify-between items-center">
+      <h3 class="text-sm font-medium text-red-800">
+        {{ postsError$ | async }}
+      </h3>
+      <app-button variant="outline" size="sm" (clicked)="clearError()">
+        Dismiss
+      </app-button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="postsLoading$ | async" class="text-center py-12">
+    <app-loading-spinner size="lg" text="Loading posts..." [centered]="true">
+    </app-loading-spinner>
+  </div>
+
+  <!-- Posts Grid -->
+  <div *ngIf="!(postsLoading$ | async)" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <article *ngFor="let post of posts$ | async; trackBy: trackByPostId"
+      class="card hover:shadow-lg transition-shadow duration-200">
+      <div class="card-content">
+        <h2 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
+          {{ post.title }}
+        </h2>
+
+        <p class="text-gray-600 mb-4 line-clamp-3">
+          {{ post.body }}
+        </p>
+
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-gray-500">
+            User ID: {{ post.userId }}
+          </span>
+
+          <app-button variant="primary" size="sm" [routerLink]="['/posts', post.id]">
+            Read More
+          </app-button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!(postsLoading$ | async) && (posts$ | async)?.length === 0" class="text-center py-12">
+    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z">
+        </path>
+      </svg>
+    </div>
+    <h3 class="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
+    <p class="text-gray-600">Try switching to a different API environment.</p>
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="!(postsLoading$ | async) && ((posts$ | async)?.length ?? 0) > 0" class="mt-8 flex justify-center">
+    <app-button variant="primary" (clicked)="loadMorePosts()" [loading]="postsLoading$ | async">
+      Load More Posts
+    </app-button>
+  </div>
+</div>
