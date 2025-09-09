@@ -1,4 +1,4 @@
-package com.api.argonock.exception;
+package com.api.argonock.config;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
